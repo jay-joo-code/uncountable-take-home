@@ -4,8 +4,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import { INPUTS, OUTPUTS } from "../constants/data";
 import RAW_DATA from "../data.json";
+import { Outputs } from "../types/data";
 
-const outputMinMax = {
+const outputMinMax: Record<Outputs, [number, number]> = {
   Viscosity: [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY],
   "Cure Time": [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY],
   Elongation: [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY],
@@ -15,15 +16,21 @@ const outputMinMax = {
 
 Object.values(RAW_DATA).map((data) => {
   Object.entries(data.outputs).map(([output, value]) => {
-    outputMinMax[output][0] = Math.min(outputMinMax[output][0], value);
-    outputMinMax[output][1] = Math.max(outputMinMax[output][1], value);
+    outputMinMax[output as Outputs][0] = Math.min(
+      outputMinMax[output as Outputs][0],
+      value,
+    );
+    outputMinMax[output as Outputs][1] = Math.max(
+      outputMinMax[output as Outputs][1],
+      value,
+    );
   });
 });
 
 function HistogramView() {
-  const [selectedOutput, setSelectedOutput] = useState<string | null>();
+  const [selectedOutput, setSelectedOutput] = useState<Outputs | null>();
   const [rangeValue, setRangeValue] = useState<[number, number]>([0, 0]);
-  const handleChangeSelectedOutput = (output: string) => {
+  const handleChangeSelectedOutput = (output: Outputs) => {
     setSelectedOutput(undefined);
     setTimeout(() => {
       setSelectedOutput(output);
@@ -32,7 +39,7 @@ function HistogramView() {
   };
   const data = Object.entries(RAW_DATA)
     .filter(
-      ([timestamp, data]) =>
+      ([_, data]) =>
         !selectedOutput ||
         (data.outputs[selectedOutput] > rangeValue[0] &&
           data.outputs[selectedOutput] < rangeValue[1]),
