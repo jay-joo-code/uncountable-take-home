@@ -4,10 +4,7 @@ import styled from "styled-components";
 import { Button, Center, Title } from "@mantine/core";
 import { useState } from "react";
 import { INPUTS, OUTPUTS } from "../constants/data";
-
-type Inputs = (typeof INPUTS)[number];
-
-type Outputs = (typeof OUTPUTS)[number];
+import { Inputs, Outputs } from "../types/data";
 
 function ScatterplotView() {
   const [selectedInputs, setSelectedInputs] = useState<Inputs[]>([
