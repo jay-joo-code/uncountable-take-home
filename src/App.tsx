@@ -45,7 +45,7 @@ function App() {
   const [selectedOutput, setSelectedOutput] = useState<Outputs>("Viscosity");
 
   const data = selectedInputs.map((input) => {
-    const groupData = Object.entries(RAW_DATA).map(([_, data]) => ({
+    const groupData = Object.values(RAW_DATA).map((data) => ({
       x: data.inputs[input],
       y: data.outputs[selectedOutput],
     }));
