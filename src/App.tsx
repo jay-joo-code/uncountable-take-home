@@ -74,7 +74,7 @@ function App() {
       <Toolbar>
         <Title order={6}>Inputs</Title>
         {INPUTS.map((input) => (
-          <ButtonContainer>
+          <ButtonContainer key={input}>
             <Button
               color={selectedInputs.includes(input) ? "dark" : "gray"}
               size="xs"
@@ -87,7 +87,7 @@ function App() {
 
         <Title order={6}>Outputs</Title>
         {OUTPUTS.map((output) => (
-          <ButtonContainer>
+          <ButtonContainer key={output}>
             <Button
               color={selectedOutput === output ? "dark" : "gray"}
               size="xs"
