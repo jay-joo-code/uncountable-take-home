@@ -42,9 +42,8 @@ function ScatterplotView() {
       <Toolbar>
         <Title order={6}>Inputs</Title>
         {INPUTS.map((input) => (
-          <ButtonContainer>
+          <ButtonContainer key={input}>
             <Button
-              key={input}
               color={selectedInputs.includes(input) ? "dark" : "gray"}
               size="xs"
               onClick={() => handleToggleInput(input)}
@@ -56,9 +55,8 @@ function ScatterplotView() {
 
         <Title order={6}>Outputs</Title>
         {OUTPUTS.map((output) => (
-          <ButtonContainer>
+          <ButtonContainer key={output}>
             <Button
-              key={output}
               color={selectedOutput === output ? "dark" : "gray"}
               size="xs"
               onClick={() => handleSelectOutput(output)}
